@@ -1,0 +1,14 @@
+{%extends 'core/base.html'%}
+{% block header %}
+    Peliculas
+{% endblock header %}
+{% block main %}
+    <div>
+        {% for p in peliculas %}
+            <p>{{ p }}</p>        
+        {% endfor %}
+
+    </div>
+    <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
+
+{% endblock main %}
