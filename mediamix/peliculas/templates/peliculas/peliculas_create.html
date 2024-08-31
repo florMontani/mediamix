@@ -1,14 +1,13 @@
 {%extends 'core/base.html'%}
 {% block header %}
-    Director
+    Creación de Peliculas
 {% endblock header %}
 {% block main %}
-    <div>
-        {% for p in director %}
-            <p>Director:{{ p }}</p>        
-        {% endfor %}
-
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Enviar</button>
+    </form>
     </div>
     <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
-
 {% endblock main %}

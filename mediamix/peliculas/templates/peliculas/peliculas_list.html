@@ -3,12 +3,26 @@
     Peliculas
 {% endblock header %}
 {% block main %}
+    <form action="{% url 'peliculas:peliculas_list' %}" method="get">
+        <input type="text" name="q" placeholder="Buscar...">
+        <button type="submit">Buscar</button>
+    </form>
+
     <div>
         {% for p in peliculas %}
-            <p>{{ p }}</p>        
-        {% endfor %}
-
+        <h2>{{ p.nombre }}</h2>
+        <h4>
+            Géneros:
+            {% if p.generos.all %}
+                {% for genero in p.generos.all %}
+                    {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                No asignado
+            {% endif %}
+        </h4>               
+        <p>{{ p.descripcion }}</p>        
+    {% endfor %}
     </div>
     <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
-
 {% endblock main %}
