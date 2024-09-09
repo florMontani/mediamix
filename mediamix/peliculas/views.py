@@ -44,19 +44,9 @@ class PeliculaUpdate(UpdateView):
     success_url = reverse_lazy('peliculas:peliculas_list')
 
 #Delete    
-# def peliculas_delete(request,pk:int):
-#     query = Peliculas.objects.get(id=pk)
-#     if request.method == 'POST':
-#        query.delete()
-#        return redirect('peliculas:peliculas_list')
-#     return render(request,'peliculas/peliculas_confirm_delete.html',{'object':query})
 class PeliculaDelete(DeleteView):
     model = Peliculas
     success_url = reverse_lazy('peliculas:peliculas_list')
-
-
-    
-
 
 # DIRECTOR
 
@@ -70,7 +60,10 @@ class DirectorList(ListView):
         if query:
             queryset = Director.objects.filter(nombre__icontains=query)
         return queryset  
-
-def director_detail(request, pk:int):
-    query = Director.objects.get(id=pk)
-    return render(request,'peliculas/director_detail.html',{'object':query}) 
+    
+#Details
+# def director_detail(request, pk:int):
+#     query = Director.objects.get(id=pk)
+#     return render(request,'peliculas/director_detail.html',{'object':query})
+class DirectorDetail(DetailView):
+    model = Director  
