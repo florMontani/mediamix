@@ -50,6 +50,7 @@ class PeliculaDelete(DeleteView):
 
 # DIRECTOR
 
+# create "create","update", delete.
 #List
 class DirectorList(ListView):
     model = Director
@@ -62,8 +63,5 @@ class DirectorList(ListView):
         return queryset  
     
 #Details
-# def director_detail(request, pk:int):
-#     query = Director.objects.get(id=pk)
-#     return render(request,'peliculas/director_detail.html',{'object':query})
 class DirectorDetail(DetailView):
     model = Director  
