@@ -1,28 +1,29 @@
-{%extends 'core/base.html'%}
+{% extends 'core/base.html' %}
+
 {% block header %}
-    Peliculas
+    Películas
 {% endblock header %}
+
 {% block main %}
     <form action="{% url 'peliculas:peliculas_list' %}" method="get">
-        <input type="text" name="q" placeholder="Buscar...">
+        <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
         <button type="submit">Buscar</button>
+        <button>
+            <a href="{% url 'peliculas:peliculas_create' %}">Crear Película</a>
+        </button>
     </form>
 
     <div>
-        {% for p in peliculas %}
-        <h2>{{ p.nombre }}</h2>
-        <h4>
-            Géneros:
-            {% if p.generos.all %}
-                {% for genero in p.generos.all %}
-                    {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            {% else %}
-                No asignado
-            {% endif %}
-        </h4>               
-        <p>{{ p.descripcion }}</p>        
-    {% endfor %}
+        {% if peliculas %}
+            {% for p in peliculas %}
+            <h2>{{ p.nombre }}</h2>
+            <a href="{% url 'peliculas:peliculas_detail' p.id %}">Más información</a>
+            <a href="{% url 'peliculas:peliculas_update' p.id %}">Modificar</a>
+            <a href="{% url 'peliculas:peliculas_delete' p.id %}">Borrar</a>
+            {% endfor %}
+        {% else %}
+            <p>No encontrado</p>
+        {% endif %}
     </div>
     <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
 {% endblock main %}

@@ -4,8 +4,13 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Director(models.Model):
     nombre = models.CharField(max_length=50,unique=True)
+    Biografia =  models.TextField(blank=True,null=True)
+
     def __str__(self):
         return self.nombre
+    @property
+    def peliculas(self):
+        return self.peliculas_director.all()
     
 class Genero(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
@@ -20,7 +25,7 @@ class Peliculas(models.Model):
             MaxValueValidator(10)
         ])
     estreno = models.DateField(null=True, blank=True)
-    director_origen_id = models.ForeignKey(Director, on_delete=models.SET_NULL, null=True, blank=True)
+    director_origen_id = models.ForeignKey(Director, on_delete=models.SET_NULL, null=True, blank=True, related_name='peliculas_director')
     generos = models.ManyToManyField(Genero, related_name='peliculas')
     def __str__(self):
         return self.nombre

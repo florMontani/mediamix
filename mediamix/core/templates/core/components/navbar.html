@@ -1,4 +1,18 @@
 <navbar>
-    <button><a href="{% url 'peliculas:index' %}">App Peliculas</a></button>
-    <button><a href="{% url 'core:index' %}">Home</a></button> 
+    <button><a href="{% url 'core:index' %}">Home</a></button>
+    {% if user.is_authenticated %}
+        
+        <button><a href="{% url 'peliculas:index' %}">App Peliculas</a></button>
+        <button>
+            <a href="#">{{ user.username }}</a>
+        </button>
+        <form action="{% url 'core:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+        </form> 
+    {% else %}
+        <button>
+            <a href="{% url 'core:login' %}">Login</a>
+        </button>
+    {% endif %}
 </navbar>  

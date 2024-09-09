@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+   Películas
+{% endblock header %}
+
+{% block main %}
+    <form action="{% url 'peliculas:peliculas_list' %}" method="get">
+        <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
+        <button type="submit">Buscar</button>
+        <button>
+            <a href="{% url 'peliculas:peliculas_create' %}">Crear Película</a>
+        </button>
+    </form>
+
+    <div>
+        <ul>
+            <li>Nombre:{{object.nombre}}</li>
+            <li>Descripción:{{object.descripcion}}</li>
+        </ul>
+        
+<h4>
+    Géneros:
+    {% if object.generos.all %}
+        {% for genero in object.generos.all %}
+            {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    {% else %}
+        No asignado
+    {% endif %}
+</h4>
+<p>{{ object.descripcion }}</p> 
+<p>
+    Director:
+    {% if object.director_origen_id %}
+        {{ object.director_origen_id}}
+    {% else %}
+        Sin registro de director
+    {% endif %}
+</p>
+    </div>
+    <button><a href="{% url 'peliculas:peliculas_list' %}">Volver</a></button>
+{% endblock main %}
+
+
+
+

@@ -3,9 +3,14 @@
     Director
 {% endblock header %}
 {% block main %}
+<form action="{% url 'peliculas:director_list' %}" method="get">
+    <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
+    <button type="submit">Buscar</button>
+</form>
     <div>
-        {% for p in director %}
-            <p>Director:{{ p }}</p>        
+        {% for o in director %}
+            <p>Director:{{ o }}</p>
+            <a href="{% url 'peliculas:director_detail' o.id %}">Más información</a>       
         {% endfor %}
 
     </div>

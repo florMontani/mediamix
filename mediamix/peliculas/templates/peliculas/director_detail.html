@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Director
+{% endblock header %}
+
+{% block main %}
+
+    <div>
+        <h1>{{ object.nombre }}</h1>
+<h2>Películas dirigidas:</h2>
+<ul>
+    {% for pelicula in object.peliculas_director.all %}
+        <li>{{ pelicula.nombre}}</li>
+        {% empty %}
+        <li>No hay películas dirigidas.</li>
+    {% endfor %}
+</ul>
+
+        
+    </div>
+    <button><a href="{% url 'peliculas:director_list' %}">Volver a los demás directores</a></button>
+{% endblock main %}
+
+
+
+

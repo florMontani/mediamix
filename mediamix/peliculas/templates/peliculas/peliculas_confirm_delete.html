@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Películas: Borrar películas
+{% endblock header %}
+
+{% block main %}
+    <p>¿Estás seguro que querés borrar "{{object.nombre}}"?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmo</button>
+    </form>
+    <button><a href="{% url 'peliculas:peliculas_list' %}">Volver</a></button>
+{% endblock main %}
+
+
+
+

@@ -3,17 +3,19 @@ from django import forms
 from .models import Peliculas
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+import re
 
 class PeliculasForm(forms.ModelForm):
     class Meta:
         model = Peliculas
         fields= "__all__"
+        widgets = {'estreno':forms.DateInput(attrs={'type':'date'})}
         
     def clean_nombre(self):
         nombre: str = self.cleaned_data.get("nombre"," ")
         
     #validar que contenga letras
-        if not nombre.isalpha():
+        if not re.match(r'^[a-zA-Z\s]+$', nombre):
             raise ValidationError("el nombre solo debe contener letras")
     #validar la long del nombre de la pelicula       
         if len(nombre)<1 or len(nombre)>20:

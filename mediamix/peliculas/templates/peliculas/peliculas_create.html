@@ -1,6 +1,10 @@
 {%extends 'core/base.html'%}
 {% block header %}
-    Creación de Peliculas
+    {% if form.instance.pk %}
+    Películas: Actualizar información
+    {% else %}    
+    Películas: Agregar información
+    {% endif %}
 {% endblock header %}
 {% block main %}
     <form method="post">
