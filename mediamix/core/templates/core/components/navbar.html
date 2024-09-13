@@ -1,5 +1,6 @@
 <navbar>
     <button><a href="{% url 'core:index' %}">Home</a></button>
+    <button><a href="{% url 'core:sobremi' %}">Sobre Mi</a></button>
     {% if user.is_authenticated %}
         
         <button><a href="{% url 'peliculas:index' %}">App Peliculas</a></button>

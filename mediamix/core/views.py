@@ -8,6 +8,9 @@ from .forms import CustomUserCreationForm
 def index(request):
     return render(request,'core/index.html')
 
+def sobremi(request):
+    return render(request,'core/sobremi.html')
+
 class Register(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'core/register.html'
