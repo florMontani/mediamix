@@ -5,7 +5,7 @@
         
         <button><a href="{% url 'peliculas:index' %}">App Peliculas</a></button>
         <button>
-            <a href="#">{{ user.username }}</a>
+            <a href="{% url 'core:profile'%}">{{ user.username }}</a>
         </button>
         <form action="{% url 'core:logout' %}" method="post">
             {% csrf_token %}
