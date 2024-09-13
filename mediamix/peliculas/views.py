@@ -5,8 +5,11 @@ from .models import Peliculas, Director
 from .forms import PeliculasForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
+
 def index(request):
     return render(request,'peliculas/index.html')
 
@@ -15,7 +18,7 @@ def index(request):
 #PELICULAS
 
 #List
-class PeliculaList(ListView):
+class PeliculaList(LoginRequiredMixin,ListView):
     model = Peliculas
     context_object_name = 'peliculas'
     def get_queryset(self):
@@ -26,35 +29,40 @@ class PeliculaList(ListView):
         return queryset  
       
 #Create
-class PeliculaCreate(CreateView):
+class PeliculaCreate(LoginRequiredMixin,CreateView):
     model = Peliculas
     form_class = PeliculasForm
     template_name = 'peliculas/peliculas_create.html'
     success_url = reverse_lazy('peliculas:peliculas_list')
+
 
 #Detail
-class PeliculaDetail(DetailView):
-    model = Peliculas 
+class PeliculaDetail(LoginRequiredMixin,DetailView):
+    model = Peliculas
+
 
 #Update
-class PeliculaUpdate(UpdateView):
+class PeliculaUpdate(LoginRequiredMixin,UpdateView):
     model = Peliculas
     form_class = PeliculasForm
     template_name = 'peliculas/peliculas_create.html'
     success_url = reverse_lazy('peliculas:peliculas_list')
+  
 
 #Delete    
-class PeliculaDelete(DeleteView):
+class PeliculaDelete(LoginRequiredMixin,DeleteView):
     model = Peliculas
     success_url = reverse_lazy('peliculas:peliculas_list')
+
 
 # DIRECTOR
 
 # create "create","update", delete.
 #List
-class DirectorList(ListView):
+class DirectorList(LoginRequiredMixin,ListView):
     model = Director
     context_object_name = 'director'
+ 
     def get_queryset(self):
         queryset =  super().get_queryset() #Director.objects.all()
         query = self.request.GET.get("q")
@@ -63,5 +71,5 @@ class DirectorList(ListView):
         return queryset  
     
 #Details
-class DirectorDetail(DetailView):
-    model = Director  
+class DirectorDetail(LoginRequiredMixin,DetailView):
+    model = Director
