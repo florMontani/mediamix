@@ -9,6 +9,7 @@ from . import models
 
 from django.contrib import admin
 from . import models
+from .models import Premium
 
 @admin.register(models.Peliculas)
 class PeliculasAdmin(admin.ModelAdmin):
@@ -32,3 +33,9 @@ class DirectorAdmin(admin.ModelAdmin):
 @admin.register(models.Genero)
 class GeneroAdmin(admin.ModelAdmin):
     list_display = ('nombre',)
+    
+class PremiumAdmin(admin.ModelAdmin):
+    list_display = ('plan', 'precio', 'fecha_actualizacion')
+    search_fields = ('plan',)
+
+admin.site.register(Premium, PremiumAdmin)    

@@ -1,7 +1,16 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block header %}
 ¡Bievenidos a MediaMix!
 {% endblock header %}
 {% block main %}
 <p>La App para consultar y guardar tus series y películas favoritas.</p>
+
+<img src="{% static 'core/img/mediamix.jpg' %}" 
+alt="Mediamix"
+width="100%"
+height="auto"
+style="display:block;
+margin:auto"
+>
 {% endblock main %}
