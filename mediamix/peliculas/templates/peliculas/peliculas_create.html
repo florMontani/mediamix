@@ -1,17 +1,26 @@
-{%extends 'core/base.html'%}
+{% extends 'core/base.html' %}
+
 {% block header %}
-    {% if form.instance.pk %}
-    Películas: Actualizar información
-    {% else %}    
-    Películas: Agregar información
-    {% endif %}
+    <h1 class="mt-4 text-center">
+        {% if form.instance.pk %}
+            Películas: Actualizar información
+        {% else %}
+            Películas: Agregar información
+        {% endif %}
+    </h1>
 {% endblock header %}
+
 {% block main %}
+<div class="container mt-4">
     <form method="post">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Enviar</button>
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" id="btn-rosa" class="m-4 btn active">Enviar</button>
     </form>
+    <div class="mt-4 text-center">
+        <a class="btn btn-secondary" href="{% url 'peliculas:index' %}">Volver</a>
     </div>
-    <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
+</div>
 {% endblock main %}

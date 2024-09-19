@@ -3,8 +3,11 @@
     Logout
 {% endblock header %}
 {% block main %}
+<div class="container m-4">
+
     <p>Has cerrado sesión</p>
-    <button type="submit">
-        <a href="{% url 'core:index' %}">volver</a>
-    </button>
+
+        <a  class="btn btn-secondary  btn-sm" type="submit" href="{% url 'core:index' %}">volver</a>
+  
+</div>
 {% endblock main %}

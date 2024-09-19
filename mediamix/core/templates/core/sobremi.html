@@ -1,7 +1,22 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block header %}
-¡Sobre mi!
 {% endblock header %}
 {% block main %}
-<p>test test tes</p>
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <!-- Imagen -->
+        <div class="col-md-6 text-center mb-4 mb-md-0">
+            <img src="{% static 'core/img/yo.jpeg' %}" 
+                 alt="Florencia Belén Montani"
+                 class="img-fluid "
+                 style="max-width: 50%; height: auto;">
+        </div>
+        <!-- Texto -->
+        <div class="col-md-6">
+            <h2 class="mb-4">Sobre mí</h2>
+            <p class="lead">Mi nombre es Florencia Belén Montani y estoy trabajando en Globant durante 2 años y medio. Tengo un amplio conocimiento en herramientas como Google Analytics (migración de Universal a Google Analytics 4), Google Tag Manager (JavaScript), Big Query (SQL legacy), Colab (Python) y Looker (Dashboard tool).</p>
+
+            <p class="lead">Además de mi experiencia en JavaScript, HTML, CSS y MySQL, tengo un título en Relaciones Públicas de UADE. Después de terminar mi carrera en 2019, hice una maestría en Marketing Digital. Luego decidí estudiar programación y diseño web en Da Vinci, lo que me brindó un sólido conocimiento en frontend. <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/florencia-bel%C3%A9n-montani-94bb91150/" class="color">Conoceme!</a>
+
 {% endblock main %}

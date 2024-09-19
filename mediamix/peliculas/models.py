@@ -21,6 +21,9 @@ class Genero(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
     def __str__(self):
         return self.nombre
+    class Meta:
+        verbose_name = 'Género'
+        verbose_name_plural = 'Generos'
         
 class Peliculas(models.Model):
     nombre = models.CharField(max_length=100, unique=True)

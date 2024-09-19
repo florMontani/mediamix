@@ -1,0 +1,13 @@
+<h2 class="text-center my-4 mb-12">
+    Películas
+
+</h2>
+<div class="container-fluid mt-4">
+    <form class="d-flex align-items-center mb-4" role="search" 
+          action="{% if 'pelicula' in request.path %}{% url 'peliculas:peliculas_list' %}{% else %}{% url 'peliculas:director_list' %}{% endif %}" 
+          method="get">
+        <input class="form-control me-2" style="max-width: 250px;" type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
+        
+        <button type="submit" class="btn btn-outline-success me-2">Buscar</button>
+    </form>
+</div>

@@ -1,29 +1,36 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-    Películas
 {% endblock header %}
 
 {% block main %}
-    <form action="{% url 'peliculas:peliculas_list' %}" method="get">
-        <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
-        <button type="submit">Buscar</button>
-        <button>
-            <a href="{% url 'peliculas:peliculas_create' %}">Crear Película</a>
-        </button>
-    </form>
+{% include 'core/components/buscador.html' %}
+<a id="btn-rosa" class="m-4 btn active" href="{% url 'peliculas:peliculas_create' %}">Crear Película</a>
 
-    <div>
-        {% if peliculas %}
+
+<div class=" m-4 mb-12">
+
+    {% if peliculas %}
+        <div class="list-group">
             {% for p in peliculas %}
-            <h2>{{ p.nombre }}</h2>
-            <a href="{% url 'peliculas:peliculas_detail' p.id %}">Más información</a>
-            <a href="{% url 'peliculas:peliculas_update' p.id %}">Modificar</a>
-            <a href="{% url 'peliculas:peliculas_delete' p.id %}">Borrar</a>
+                <div class="list-group-item">
+                    <h3>{{ p.nombre }}</h3>
+                    <div>
+                        <a id="btn-rosa" class="btn btn-outline btn-sm active" href="{% url 'peliculas:peliculas_detail' p.id %}">Más información</a>
+                        <a id="btn-rosa" class="btn btn-outline btn-sm active" href="{% url 'peliculas:peliculas_update' p.id %}">Modificar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'peliculas:peliculas_delete' p.id %}">Borrar</a>
+                    </div>
+                </div>
             {% endfor %}
-        {% else %}
-            <p>No encontrado</p>
-        {% endif %}
+        </div>
+    {% else %}
+        <p>No encontrado</p>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a class="btn btn-secondary" href="{% url 'peliculas:index' %}">Volver</a>
     </div>
-    <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
+</div>
+</div>
 {% endblock main %}
+

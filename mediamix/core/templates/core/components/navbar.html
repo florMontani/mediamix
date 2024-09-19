@@ -1,19 +1,80 @@
-<navbar>
-    <button><a href="{% url 'core:index' %}">Home</a></button>
-    <button><a href="{% url 'core:sobremi' %}">Sobre Mi</a></button>
-    {% if user.is_authenticated %}
-        
-        <button><a href="{% url 'peliculas:index' %}">App Peliculas</a></button>
-        <button>
-            <a href="{% url 'core:profile'%}">{{ user.username }}</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaMix</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moderustic:wght@300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg nav">
+        <a class="navbar-brand color" href="{% url 'core:index' %}">Media <span class="mix">Mix</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <form action="{% url 'core:logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-        </form> 
-    {% else %}
-        <button>
-            <a href="{% url 'core:login' %}">Login</a>
-        </button>
-    {% endif %}
-</navbar>  
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:sobremi' %}">Sobre Mi</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'peliculas:index' %}">Películas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'peliculas:director_list' %}" class="nav-link">Directores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:profile' %}">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'core:logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link">Log out</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    {% block content %}
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        .nav {
+            background-color: #f1dfe8; /* Color rosa claro */
+            flex: 1;
+        }
+        .navbar-brand {
+            font-family: "Moderustic", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+        }
+        .color {
+            color: #ff007f; 
+        }
+        .mix {
+            color: #ee6c08; 
+        }
+        .navbar-brand:hover {
+            color: #e60073; /* Color rosa más oscuro al pasar el ratón */
+        }
+    </style>
+</body>
+</html>

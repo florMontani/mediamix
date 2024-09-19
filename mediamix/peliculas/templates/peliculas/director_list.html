@@ -1,19 +1,39 @@
 {%extends 'core/base.html'%}
 {% block header %}
-    Director
 {% endblock header %}
 {% block main %}
-<form action="{% url 'peliculas:director_list' %}" method="get">
-    <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
-    <button type="submit">Buscar</button>
-</form>
-    <div>
+<h2 class="text-center my-4 mb-12">
+    Directores
+</h2>
+<div class="container-fluid mt-4">
+
+    <form action="{% url 'peliculas:director_list' %}" method="get">
+        <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
+        <button class="btn btn-outline-success me-2" type="submit">Buscar</button>
+    </form>
+</div>
+
+
+
+
+
+<div class=" m-4 mb-12">
+    <div class="list-group-item">
         {% for o in director %}
-            <p>Director:{{ o }}</p>
-            <a href="{% url 'peliculas:director_detail' o.id %}">Más información</a>       
+            <h3>{{ o }}</h3>
+            <br>
+            <div>
+
+                <a id="btn-rosa" class="btn btn-outline btn-sm active" href="{% url 'peliculas:director_detail' o.id %}">Más información</a>       
+            </div>
         {% endfor %}
 
     </div>
-    <button><a href="{% url 'peliculas:index' %}">Volver</a></button>
+
+    <div class="mt-4">
+        <a class="btn btn-secondary" href="{% url 'peliculas:index' %}">Volver</a>
+    </div>
+</div>
+    
 
 {% endblock main %}

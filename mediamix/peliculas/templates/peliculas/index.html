@@ -1,10 +1,31 @@
 {%extends 'core/base.html'%}
 {% block header %}
-    Peliculas
 {% endblock header %}
 {% block main %}
-<button><a href="{% url 'peliculas:peliculas_list' %}">Listar peliculas</a></button>
-<button><a href="{% url 'peliculas:peliculas_create' %}">Crear peliculas</a></button>
-<button><a href="{% url 'peliculas:director_list' %}">Listar directores</a></button>
+<h2 class="text-center my-4 mb-12">Películas</h2>
+<div class="container text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <a href="{% url 'peliculas:peliculas_list' %}" id="btn-rosa"class="  btn active m-4">Listar películas</a>
+            <p class="card-text">Listá todas las películas y hacé click para ver más información</p>
+        </div>
+        <div class="col-md-4 mb">
+            <a href="{% url 'peliculas:peliculas_create' %}"id="btn-rosa"class=" m-4  btn active">Crear película</a>
+            <p>Agregá tus películas favoritas, no olvides agregar toda la información relevante como director, fecha de estreno y raiting.</p>
+        </div>
+        <div class="col-md-4 mb">
+          <a href="{% url 'peliculas:director_list' %}" id="btn-rosa"class="m-4 btn active">Listar directores</a>
+          <p>Ingresá a ver los directores de las películas, podes leer su biografía!</p>
+
+        </div>
+        
+    </div>
+</div>
+
+ 
 
 {% endblock main %}
+
+
+
+

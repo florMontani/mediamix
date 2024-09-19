@@ -1,46 +1,66 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-   Películas
+    <h1 class="mt-4 text-center">{{ object.nombre }}</h1>
 {% endblock header %}
 
 {% block main %}
-    <form action="{% url 'peliculas:peliculas_list' %}" method="get">
-        <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}">
-        <button type="submit">Buscar</button>
-        <button>
-            <a href="{% url 'peliculas:peliculas_create' %}">Crear Película</a>
-        </button>
-    </form>
+<div class="container mt-4">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body text-center">
+            <h5 class="card-title">Detalles de la Película</h5>
+            <ul class="list-unstyled">
+                <li><strong>Nombre:</strong> {{ object.nombre }}</li>
+                <br>
+                <li>
+                    <strong>Imagen:</strong>
+                    <div class="mt-2">
+                        {% if object.imagen %}
+                        <img src="{{ object.imagen.url }}" alt="Imagen de {{ object.nombre }}" class="img-fluid" style="max-width: 200px;" />
+                        {% else %}
+                        <p>No disponible</p>
+                        {% endif %}
+                    </div>
+                    <br>
+                </li>
+                <li><strong>Descripción:</strong> {{ object.descripcion }}</li>
+                <li>
+                    <strong>Raiting:</strong>
 
-    <div>
-        <ul>
-            <li>Nombre:{{object.nombre}}</li>
-            <li>Descripción:{{object.descripcion}}</li>
-        </ul>
-        
-<h4>
-    Géneros:
-    {% if object.generos.all %}
-        {% for genero in object.generos.all %}
-            {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    {% else %}
-        No asignado
-    {% endif %}
-</h4>
-<p>
-    Director:
-    {% if object.director_origen_id %}
-        {{ object.director_origen_id}}
-    {% else %}
-        Sin registro de director
-    {% endif %}
-</p>
+                        {% if object.raiting %}
+                        {{ object.raiting }}
+                        {% else %}
+                            <p>No disponible</p>
+                        {% endif %}
+                </li>
+                <br>
+           
+                <li>
+                <strong>Género:</strong>
+                {% if object.generos.all %}
+                    {% for genero in object.generos.all %}
+                        {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% else %}
+                    No asignado
+                {% endif %}
+                </li>
+            </ul>
+            <p>
+                <strong>Director:</strong>
+                {% if object.director_origen_id %}
+                    {{ object.director_origen_id }}
+                {% else %}
+                    Sin registro de director
+                {% endif %}
+            </p>
+        </div>
     </div>
-    <button><a href="{% url 'peliculas:peliculas_list' %}">Volver</a></button>
+
+    <div class="mt-4 text-center">
+        <a class="btn btn-outline-secondary" href="{% url 'peliculas:peliculas_list' %}">Volver</a>
+        <a id="btn-rosa" class="m-4 btn active" href="{% url 'peliculas:peliculas_create' %}">Crear Película</a>
+
+    </div>
+</div>
 {% endblock main %}
-
-
-
-

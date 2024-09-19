@@ -5,21 +5,37 @@
 {% endblock header %}
 
 {% block main %}
-
-    <div>
-        <h1>{{ object.nombre }}</h1>
-<h2>Películas dirigidas:</h2>
-<ul>
-    {% for pelicula in object.peliculas_director.all %}
-        <li>{{ pelicula.nombre}}</li>
-        {% empty %}
-        <li>No hay películas dirigidas.</li>
-    {% endfor %}
-</ul>
-
-        
+<div class="container mt-4">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body text-center">
+            <h5 class="card-title">Detalles del director</h5>  
+            <ul class="list-unstyled">
+                <li><strong>{{ object.nombre }}</strong></li>
+                <li>Películas dirigidas:</li>
+                {% for pelicula in object.peliculas_director.all %}
+                <li>{{ pelicula.nombre}}</li>
+                {% empty %}
+                <li>No hay películas dirigidas.</li>
+            {% endfor %}
+            <br>
+            <li>
+                <strong>Bigrafía:</strong>
+                {% if object.biografia %}
+                {{ object.biografia }}
+                {% else %}
+                    <p>No disponible</p>
+                {% endif %}
+            </li>
+            </ul> 
+  
+            
+        </div>
     </div>
-    <button><a href="{% url 'peliculas:director_list' %}">Volver a los demás directores</a></button>
+</div>
+<div class="mt-4 text-center"> 
+
+    <a  class="btn btn-outline-secondary" href="{% url 'peliculas:director_list' %}">Volver </a>
+</div>
 {% endblock main %}
 
 

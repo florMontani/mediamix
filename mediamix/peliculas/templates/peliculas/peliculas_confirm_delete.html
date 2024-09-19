@@ -1,16 +1,20 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-    Películas: Borrar películas
+    <h1 class="mt-4 text-center">Películas: Borrar película</h1>
 {% endblock header %}
 
 {% block main %}
-    <p>¿Estás seguro que querés borrar "{{object.nombre}}"?</p>
-    <form action="" method="post">
+<div class="container mt-4 text-center">
+    <p class="lead">¿Estás seguro que querés borrar "<strong>{{ object.nombre }}</strong>"?</p>
+    <form action="" method="post" class="mb-4">
         {% csrf_token %}
-        <button type="submit">Confirmo</button>
+        <button type="submit" class="btn btn-danger btn-sm">Confirmo</button>
     </form>
-    <button><a href="{% url 'peliculas:peliculas_list' %}">Volver</a></button>
+    <div>
+        <a class="btn btn-secondary  btn-sm" href="{% url 'peliculas:peliculas_list' %}">Volver</a>
+    </div>
+</div>
 {% endblock main %}
 
 
